@@ -1,5 +1,5 @@
 # CCyber
-The idea behind _CCyber_ is to provide a central, searchable hub for prodimantly OSINT (Open Source Intelligence).
+The idea behind _CCyber_ is to provide a central, searchable hub for predominantly OSINT (Open Source Intelligence).
 Currently the app is very much at alpha/proof-of-concept stage and has very limited use.
 
 This repo is broken down into three parts:
