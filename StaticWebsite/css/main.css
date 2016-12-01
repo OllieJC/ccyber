@@ -1,0 +1,185 @@
+/*!
+* CCyber (https://ccyber.co.uk) - @olliegeek
+* Copyright 2016 CCyber.
+* Licensed under GPLv3 (https://github.com/Pr09het/ccyber/blob/master/LICENSE)
+*/
+
+body {
+	padding-top: 50px;
+	padding-bottom: 20px;
+}
+
+body.inverted {
+	background-color: rgba(0, 0, 0, 0.84);
+	color: white;
+}
+
+.mainwindow.sidebarhidden {
+	left: 2em !important;
+}
+.sidebar.sidebarhidden {
+	display:none; !important;
+}
+.sidebar .input-group, hr, .sidebaroption .mastergroup {
+	width:26em;
+}
+.sidebar .input-group, .panel-iocs, .panel-tags, hr {
+	margin-bottom:1em;
+	margin-left:0;
+}
+.panel-iocs .input-group, .panel-tags .input-group {
+	width:100% !important;
+	margin-bottom:0 !important;
+}
+.panel-iocs li, .panel-tags li {
+	overflow:hidden;
+	white-space:nowrap;
+}
+#NewContDesc { resize: vertical; }
+.list-group-item>.badge {
+	position: absolute;
+	background-color: rgba(119, 119, 119, 0.75);
+	right: 4em;
+}
+.iocitem button, .tagitem button  {
+	margin: 0 !important;
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+.sidebar {
+	position: fixed;
+	overflow-y: auto;
+	top: 0;
+	bottom: 3.7em;
+	padding-bottom: 1em;
+	left: 2em;
+	width: 28em;
+	border-right: 1px solid #969696;
+}
+.no-iocs { font-style: italic; }
+/*.mainwindow {
+	position: absolute;
+	top: 0;
+	left: 32em;
+	right: 1em;
+	padding-bottom: 5em;
+}*/
+.mainwindow {
+	position: fixed;
+	top: 0;
+	left: 32em;
+	right:0;
+	bottom: 0em;
+	padding-bottom: 3.5em;
+	overflow: hidden;
+}
+.mainwindow .windowoption {
+	overflow-y: auto;
+	height: 100%;
+	padding-bottom: 2em;
+}
+.itemtitle, .iocsheader, .feeditem .title, .feeditem.header, .newtypeoptions .typeoptheader {
+	font-size:130%;
+	font-weight:bold;
+}
+.boxview .itemtitle {
+	width: 15em; 
+	text-align: justify;
+}
+.newtypeoptions .typeopt {
+	
+}
+.iocbold, .bold {
+	font-weight: bold;
+}
+.datediv .tags {
+	margin-top: 1em;
+}
+.listview .typeoptheader {
+	margin-top: 0.6em;
+}
+.datediv .tags .tagdiv {
+	display: inline-block;
+	padding: 0.3em 1em;
+	border-radius: 0.5em;
+	color:white;
+}
+.boxview .datediv .tags .tagdiv {
+	margin: 0 0.5em 1em 0;
+}
+.listview .datediv .tags .tagdiv {
+	margin: 0 0.5em 0 0;
+}
+.feeditem {
+	padding-top: 1em;
+}
+.feeditemseen {
+	opacity:0.2;
+}
+.listboxswitchviewmode {
+	z-index: 1000;
+	font-size: 132%;
+	position: fixed;
+	top: 1em;
+	right: 1.3em;
+	text-align: center;
+	padding: 0.4em 0.6em 0.4em 0.7em;
+}
+.boxview .item {
+	padding: 0.8em 1em;
+	margin: 1em 2em 0 0;
+	display: inline-block;
+	width: 24em;
+	border-radius: 0.5em;
+	border: 1px solid #969696;
+	height: 13em;
+	overflow-y: auto;
+	overflow-x: hidden;
+	position: relative;
+}
+.listview .item {
+	margin-right: 1em;
+	padding: 0.5em 0em 1em 0em;
+	position: relative;
+	/*border-bottom: 1px solid #969696;*/
+}
+.listview .item .itemtitle {
+	display: inline-block;
+}
+.listview .item a.editbtn, .listview .item a.timepostedbtn {
+	margin-left:1em;
+}
+.boxview .item a.editbtn, .boxview .item a.timepostedbtn {
+	position: absolute;
+}
+.item a.editbtn, .item a.timepostedbtn {
+	opacity: 0.2;
+	right: 0.6em;
+}
+.boxview .item a.editbtn {
+	top: 0.4em;
+}
+.boxview .item a.timepostedbtn {
+	top: 2.5em;
+}
+.typeoptheader {
+	text-decoration: underline;
+	font-size: 115%;
+}
+.list-group-item.tagitem, .list-group-item.iocitem {
+	color:#555;
+}
+.noitems {
+	display:none;
+}
+.item a.editbtn:hover, .item a.timepostedbtn:hover {
+	opacity: 0.8;
+}
+#searchtext {
+	height: 2.3em;
+}
+#searchbtn {
+	margin-right: 1em;
+}

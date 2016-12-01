@@ -1,0 +1,195 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--
+ * CCyber (https://ccyber.co.uk) - @olliegeek
+ * Copyright 2016 CCyber.
+ * Licensed under GPLv3 (https://github.com/Pr09het/ccyber/blob/master/LICENSE)
+ -->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>CCyber</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+	</head>
+    <body class="">
+        <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+		<div class="container">
+			<div class="sidebar">
+				<div class="sidebaroption sidebaroption-new">
+					<h2>New</h2>
+					<div class="mastergroup">
+						<div class="input-group">
+							<input type="text" class="form-control" id="NewContTitle" placeholder="Title">
+						</div>
+						<div class="input-group">
+						    <textarea class="form-control" rows="3" id="NewContDesc" placeholder="Content/Description"></textarea>
+						</div>
+						
+						<hr></hr>
+						
+						<label>Type:</label>
+						<div class="input-group">
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-primary btn-group-justified dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="curtype">Article</span> <span class="caret"></span></button>
+								<ul class="dropdown-menu newtypeoptions">
+									<li><a onclick="javascript:setAddType(this);" data-plural="Articles">Article</a></li>
+									<li><a onclick="javascript:setAddType(this);" data-plural="Blog Posts">Blog Post</a></li>
+									<li><a onclick="javascript:setAddType(this);">CiSP</a></li>
+									<li><a onclick="javascript:setAddType(this);">Intelligence Sharing</a></li>
+									<li><a onclick="javascript:setAddType(this);" data-plural="Social Media Items">Social Media Item</a></li>
+									<li><a onclick="javascript:setAddType(this);" data-plural="Tweets">Tweet</a></li>
+									<li role="separator" class="divider"></li>
+									<li><a onclick="javascript:setAddType(this);">Other</a></li>
+								</ul>
+							</div>
+						</div>
+						
+						<div class="input-group">
+							<label for="NewContentUrl">Link:</label>
+							<input type="text" class="form-control" id="NewContentUrl" placeholder="https://example.org">
+						</div>
+						
+						<hr></hr>
+						
+						<div class="panel panel-default panel-iocs">
+							<div class="panel-heading">Indicators of Compromise</div>
+							<div class="input-group">
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="curioc">IP</span> <span class="caret"></span></button>
+									<ul class="dropdown-menu">
+										<li><a onclick="javascript:setAddIoC(this);">IP</a></li>
+										<li><a onclick="javascript:setAddIoC(this);">Domain</a></li>
+										<li><a onclick="javascript:setAddIoC(this);">URL</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a onclick="javascript:setAddIoC(this);">Email From</a></li>
+										<li><a onclick="javascript:setAddIoC(this);">Email To</a></li>
+										<li><a onclick="javascript:setAddIoC(this);">Email Subject</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a onclick="javascript:setAddIoC(this);">Hash</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a onclick="javascript:setAddIoC(this);">Other</a></li>
+									</ul>
+								</div>
+								<input type="text" class="form-control" id="addioc" data-onenterbutclick="btnaddioc" placeholder="...">
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-success" id="btnaddioc" onclick="javascript:addIoC();">
+										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+									</button>
+								</div>
+							</div>
+							<ul class="list-group">
+							</ul>
+						</div>
+						
+						<hr></hr>
+						
+						<div class="panel panel-default panel-tags">
+							<div class="panel-heading">Tags</div>
+							<div class="input-group">
+								<input type="text" class="form-control" id="addtags" data-onenterbutclick="btnaddtag" placeholder="...">
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-success" id="btnaddtag" onclick="javascript:addTag();">
+										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+									</button>
+								</div>
+							</div>
+							<ul class="list-group">
+							</ul>
+						</div>
+						
+						<hr></hr>
+						<input type="hidden" id="hidUID" value="">
+						<div class="btn-group btn-group-justified" role="group" >
+							<a onclick="javascript:newContClear();" class="btn btn-danger" role="button">Clear</a>
+							<a onclick="javascript:newContSubmit();" class="btn btn-success" role="button">Submit</a>
+						</div>
+					</div>
+				</div> <!-- /sidebarnew -->
+				
+				<div class="sidebaroption sidebaroption-tools" style="display:none;">
+					<h2>Tools</h2>
+					<p>Text</p>
+				</div> <!-- /sidebartools -->				
+				<div class="sidebaroption sidebaroption-settings" style="display:none;">
+					<h2>Settings</h2>
+					<div class="setting">
+						<div class="checkbox">
+							<label><input type="checkbox" id="invColourOpt" value="">&nbsp;Inverted Colour Option</label>
+						</div>
+					</div>
+					<div>
+						<button type="button" class="btn btn-success theregsec" data-loading-text="Loading...">Get The Register - Security Feed Items</button>
+					</div>
+					<div style="padding-top:1.5em;">
+						<button type="button" class="btn btn-success ibtimescybersec" data-loading-text="Loading...">Get IBTimes Cyber Security Feed Items</button>
+					</div>
+				</div> <!-- /sidebarsettings -->
+			</div> <!-- /sidebar -->
+			<div class="mainwindow">
+				<a class="btn btn-xl btn-info listboxswitchviewmode">
+					<span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+				</a>
+				<div class="windowoption windowoption-items boxview">
+					<h2>Items</h2>
+					<div class="datedivslist">
+					<!-- TEST CONTENT -->
+					<div id="Date-22-November-2016" class="datediv"><h3>Tuesday 22 November, 2016</h3><div class="opt-article"><div class="typeoptheader">Articles</div><div class="datedivcontent"><div class="item" data-uniqueid="ce98007a53247d3c91604ec5855eca224a3385fc29827d7a9e2e39fabfafdb46"><div class="itemtitle"><a target="_blank" href="http://go.theregister.com/feed/www.theregister.co.uk/2016/11/22/hack_the_army/">Hack the Army: US military begs white hats to sweep it for bugs</a></div><a class="btn btn-xs btn-info timepostedbtn" data-toggle="tooltip" title="" data-original-title="Date Added: Tuesday 22 November, 2016 21:51:03"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a><a class="btn btn-xs btn-warning editbtn" data-toggle="tooltip" title="" data-original-title="Edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a><div class="itemcontent">Uncle Sam goes crackers for hackers Security experts reckon the US government’s newly unveiled "Hack the Army" bug bounty ...</div><div class="tags"><div class="tagdiv" style="background-color:#f7a7a3">BUG BOUNTY</div><div class="tagdiv" style="background-color:#81abe2">JOHN LEYDEN</div><div class="tagdiv" style="background-color:#b4e3f7">THE REGISTER - SECURITY</div></div></div><div class="item" data-uniqueid="97b8e79be7748d0a1232ec3e929abbe19bcdfcd8b5d231b4ed669066345011fd"><div class="itemtitle"><a target="_blank" href="http://go.theregister.com/feed/www.theregister.co.uk/2016/11/22/healthcare_trojan/">Hospital info thief malware puts itself into a coma to avoid IT bods</a></div><a class="btn btn-xs btn-info timepostedbtn" data-toggle="tooltip" title="" data-original-title="Date Added: Tuesday 22 November, 2016 21:50:51"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a><a class="btn btn-xs btn-warning editbtn" data-toggle="tooltip" title="" data-original-title="Edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a><div class="itemcontent">Software nasty also uses steganography to inject poison payload A Trojan targeting US healthcare organizations attempts to ...</div><div class="tags"><div class="tagdiv" style="background-color:#81abe2">JOHN LEYDEN</div><div class="tagdiv" style="background-color:#f7cdb7">STEGANOGRAPHY</div><div class="tagdiv" style="background-color:#b4e3f7">THE REGISTER - SECURITY</div><div class="tagdiv" style="background-color:#ffcccd">TROJAN</div></div></div></div></div><div class="opt-blogpost"><div class="typeoptheader">Blog Posts</div><div class="datedivcontent"><div class="item" data-uniqueid="c7187ede110201ecea5fd4ab46a7fb5485faf635e88bd8fde56b3b3349011960"><div class="itemtitle"><a target="_blank" href="https://www.troyhunt.com/heres-how-i-verify-data-breaches/">Troy Hunt: Here's how I verify data breaches</a></div><a class="btn btn-xs btn-info timepostedbtn" data-toggle="tooltip" title="" data-original-title="Date Added: Tuesday 22 November, 2016 19:56:00"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a><a class="btn btn-xs btn-warning editbtn" data-toggle="tooltip" title="" data-original-title="Edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a><div class="itemcontent"></div><div class="tags"><div class="tagdiv" style="background-color:#f79baf">DATA BREACH</div><div class="tagdiv" style="background-color:#a6fcc1">TROY HUNT</div></div></div></div></div><div class="opt-cisp noitems"><div class="typeoptheader">CiSP</div><div class="datedivcontent"></div></div><div class="opt-intelligencesharing noitems"><div class="typeoptheader">Intelligence Sharing</div><div class="datedivcontent"></div></div><div class="opt-socialmediaitem noitems"><div class="typeoptheader">Social Media Items</div><div class="datedivcontent"></div></div><div class="opt-tweet noitems"><div class="typeoptheader">Tweets</div><div class="datedivcontent"></div></div><div class="opt-other noitems"><div class="typeoptheader">Other</div><div class="datedivcontent"></div></div></div>
+					<div id="Date-21-November-2016" class="datediv"><h3>Monday 21 November, 2016</h3><div class="opt-article"><div class="typeoptheader">Articles</div><div class="datedivcontent"><div class="item" data-uniqueid="0badf616d06ab42b0f86de6e2729a2cd838f8a64965d754abe59379aee5dfee6"><div class="itemtitle"><a target="_blank" href="http://go.theregister.com/feed/www.theregister.co.uk/2016/11/21/time_for_a_fresh_look_at_iam/">Time for a fresh look at IAM?</a></div><a class="btn btn-xs btn-info timepostedbtn" data-toggle="tooltip" title="" data-original-title="Date Added: Monday 21 November, 2016 23:22:56"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a><a class="btn btn-xs btn-warning editbtn" data-toggle="tooltip" title="" data-original-title="Edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a><div class="itemcontent">Identity and Access Management for today Broadcast&nbsp; At 8am PST / 11am EST / 4pm GMT today we'll be digging into the matter of ...</div><div class="tags"><div class="tagdiv" style="background-color:#f9db7f">DAVID GORDON</div><div class="tagdiv" style="background-color:#b4e3f7">THE REGISTER - SECURITY</div></div></div><div class="item" data-uniqueid="ff43e08434b3c822766e4a53766494695bd04753a66c660ddbd5b65e9b5fc971"><div class="itemtitle"><a target="_blank" href="http://www.ibtimes.co.uk/russia-unhackable-kremlin-computer-networks-cant-be-cracked-claim-officials-1592639">Is Russia unhackable? Kremlin computer networks can't be cracked, claim officials</a></div><a class="btn btn-xs btn-info timepostedbtn" data-toggle="tooltip" title="" data-original-title="Date Added: Monday 21 November, 2016 23:22:53"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a><a class="btn btn-xs btn-warning editbtn" data-toggle="tooltip" title="" data-original-title="Edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a><div class="itemcontent">Sensitive state secrets and classified documents are 'not connected to the internet'.</div><div class="tags"><div class="tagdiv" style="background-color:#7193e2">IBTIMES.CO.UK : CYBERSECURITY</div></div></div><div class="item" data-uniqueid="f21a2bc38bc6ee3b862d19fcb7a56384cb9ea67b87cc71a6ca7e467eb305cef0"><div class="itemtitle"><a target="_blank" href="http://www.ibtimes.co.uk/spammers-using-facebook-messages-spread-notorious-locky-ransomware-1592665">Spammers using Facebook messages to spread the notorious 'Locky' ransomware</a></div><a class="btn btn-xs btn-info timepostedbtn" data-toggle="tooltip" title="" data-original-title="Date Added: Monday 21 November, 2016 23:22:50"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a><a class="btn btn-xs btn-warning editbtn" data-toggle="tooltip" title="" data-original-title="Edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a><div class="itemcontent">Scam spreads a malware downloader called Nemucod hidden in an .svg file.</div><div class="tags"><div class="tagdiv" style="background-color:#7193e2">IBTIMES.CO.UK : CYBERSECURITY</div></div></div><div class="item" data-uniqueid="3897aee829af34365dce1c2845f016e0a26e33be637befefba94f99859066836"><div class="itemtitle"><a target="_blank" href="http://go.theregister.com/feed/www.theregister.co.uk/2016/11/21/big_data_dev_risks/">Even big data devs make big data security gaffes</a></div><a class="btn btn-xs btn-info timepostedbtn" data-toggle="tooltip" title="" data-original-title="Date Added: Monday 21 November, 2016 23:22:46"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a><a class="btn btn-xs btn-warning editbtn" data-toggle="tooltip" title="" data-original-title="Edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a><div class="itemcontent">Is that a useful tool or a compromised .exe? Only one way to find out, apparently Apache Big Data Europe&nbsp; Big data application ...</div><div class="tags"><div class="tagdiv" style="background-color:#81abe2">JOHN LEYDEN</div><div class="tagdiv" style="background-color:#b4e3f7">THE REGISTER - SECURITY</div></div></div><div class="item" data-uniqueid="af7abcec5a256ce420b06b679c70ee9b7a9eaeb5f393d4c64a710b379af4a742"><div class="itemtitle"><a target="_blank" href="http://go.theregister.com/feed/www.theregister.co.uk/2016/11/21/microsoft_to_massacre_sha1/">Microsoft plans St Valentine's Day massacre for SHA‑1</a></div><a class="btn btn-xs btn-info timepostedbtn" data-toggle="tooltip" title="" data-original-title="Date Added: Monday 21 November, 2016 23:22:42"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a><a class="btn btn-xs btn-warning editbtn" data-toggle="tooltip" title="" data-original-title="Edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a><div class="itemcontent">End of the line for weak hash as web giants finally act The death knell for the SHA‑1 cryptographic hash function will be ...</div><div class="tags"><div class="tagdiv" style="background-color:#6adbe8">IAIN THOMSON</div><div class="tagdiv" style="background-color:#b4e3f7">THE REGISTER - SECURITY</div></div></div></div></div><div class="opt-blogpost noitems"><div class="typeoptheader">Blog Posts</div><div class="datedivcontent"></div></div><div class="opt-cisp noitems"><div class="typeoptheader">CiSP</div><div class="datedivcontent"></div></div><div class="opt-intelligencesharing noitems"><div class="typeoptheader">Intelligence Sharing</div><div class="datedivcontent"></div></div><div class="opt-socialmediaitem noitems"><div class="typeoptheader">Social Media Items</div><div class="datedivcontent"></div></div><div class="opt-tweet noitems"><div class="typeoptheader">Tweets</div><div class="datedivcontent"></div></div><div class="opt-other noitems"><div class="typeoptheader">Other</div><div class="datedivcontent"></div></div></div>
+					<!-- /TEST CONTENT -->
+					</div>
+				</div> <!-- /itemwindow -->
+				<div class="windowoption windowoption-feed" style="display:none;">
+					<h2>Feed Feeder</h2>
+					<div class="feeditems">
+					</div>
+				</div> <!-- /rsswindow -->
+			</div> <!-- /mainwindow -->
+			<nav class="navbar navbar-inverse navbar-fixed-bottom">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="#">CCyber</a>
+					</div>
+					<ul class="nav navbar-nav" data-window="sidebaroption">
+						<li class="navrunopt active" data-action="new"><a href="#">New</a></li>
+						<li class="navrunopt" data-action="tools"><a href="#">Tools</a></li>
+						<li class="navrunopt" data-action="settings"><a href="#">Settings</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right" data-window="windowoption">
+						<li class="navrunopt active" data-action="items"><a href="#">Items</a></li>
+						<li class="navrunopt" data-action="feed"><a href="#">Feed Feeder</li>
+					</ul>
+					<div class="nav navbar-nav navbar-right">
+						<input type="text" id="searchtext" class="navbar-btn" placeholder="Search items...">
+						<a id="searchbtn" href="#" class="btn btn-default navbar-btn">
+							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						</a>
+					</div>
+				</div>
+			</nav>
+		</div> <!-- /container -->
+		<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script-->
+		<script src="js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/crypto-js-hmac-sha256.js"></script>
+        <script src="js/vendor/randomColor.js"></script>
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+		
+        <script src="js/functions.js"></script>
+        <script src="js/ccapi.interaction.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
