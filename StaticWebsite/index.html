@@ -22,12 +22,27 @@
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
 	</head>
-    <body class="">
+    <body class="modal-open">
       <!--[if lt IE 8]>
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
       <![endif]-->
 		
 		<!-- Modals -->      
+		  
+      <!-- Loading Modal -->
+		<div class="modaldefoshow modal fade in" id="modLoading" tabindex="-1" role="dialog" aria-labelledby="mLabLoading" aria-hidden="true">
+			<div class="modal-backdrop fade in" style="height: 100%;"></div>			
+			<div class="modal-dialog" role="document">
+				<div class="modal-content" style="text-align: center">
+			      <div class="modal-header">
+			      	<h4 class="modal-title" id="mLabLoading">Loading...</h4>
+			      </div>
+			      <div class="modal-body">
+						<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" style="font-size: 4em"></span>
+			      </div>
+			   </div>
+			</div>
+		</div>
 		  
       <!-- Find Media Modal -->
 		<div class="modal fade" id="modFindMedia" tabindex="-1" role="dialog" aria-labelledby="mLabFindMedia" aria-hidden="true">

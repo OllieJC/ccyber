@@ -7,6 +7,8 @@
 // main javascript file
 
 $(function() {
+
+	
 	$.expr[":"].icontains = $.expr.createPseudo(function(arg) {
 		return function( elem ) {
 			return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
@@ -55,7 +57,17 @@ $(function() {
 	setListBoxSwitchButton();
 	
 	resetMediaItemVars();
+	
+	hideLoadingModal();
 });
+
+function hideLoadingModal() {
+	window.setTimeout(function(){
+		console.log("Page loaded.");
+		$("body").removeClass("modal-open");
+		$("#modLoading").removeClass("modaldefoshow").modal("hide");
+	}, 2000);	
+}
 
 function searchBtnClick() {
 	resetSearch();
