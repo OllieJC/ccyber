@@ -61,6 +61,26 @@ function dynamicSortMultiple() {
     }
 }
 
+function singleRegexMatch(regex,text,toLower) {
+	var res = text.match(regex);
+	if (res.length < 2) {
+		res = false;	
+	} else {
+		if (typeof(res[1]) != "undefined") { 
+			res = res[1];	
+		} else if (typeof(res[2]) != "undefined") { 
+			res = res[2];	
+		} else {
+			res = false;		
+		}
+		
+		if (res && toLower) {		
+			res = res.toLowerCase();
+		}	
+	}
+	return res;
+}
+
 // ----- VALIDATION -----
 
 function hasValue(inputstr) {

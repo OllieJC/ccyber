@@ -53,6 +53,8 @@ $(function() {
 	
 	setItemsButtonTooltip();
 	setListBoxSwitchButton();
+	
+	resetMediaItemVars();
 });
 
 function searchBtnClick() {
@@ -144,6 +146,120 @@ function navRunOption() {
 		parentUl.children("li").removeClass("active")
 		thisopt.addClass("active")
 	}
+}
+
+function returnDomainFromURL(url) {
+	return singleRegexMatch( /\:\/\/([^\/\?]*)/, url, true);
+}
+
+function extractYouTubeId(url) {
+	return singleRegexMatch( /\?v=([^&]*)|\.be\/([^&]*)/, url, false);
+}
+
+var tempMediaItem = {};
+var currentMediaItem = {};
+
+function resetMediaItemVars() {
+	tempMediaItem = {domain:"unknown", domType:"unknown", saveHtml:"", url:""};
+	setCurrentMItoTMI();
+}
+function setCurrentMItoTMI() {
+	currentMediaItem.domain = tempMediaItem.domain;
+	currentMediaItem.domType = tempMediaItem.domType;
+	currentMediaItem.saveHtml = tempMediaItem.saveHtml;
+	currentMediaItem.url = tempMediaItem.url;
+}
+
+var youTubeIframe = "<iframe width='100%' height='100%' src='https://www.youtube.com/embed/{id}' frameborder='0' allowfullscreen></iframe>";
+
+$('#modFindMedia').on('show.bs.modal', function (event) {
+	var modFindMediaOK = $(".modFindMediaOK");
+	var modFindMediaOKVal = "OK";
+	tempMediaItem.saveHtml = "";
+	tempMediaItem.domType = "unknown";
+	var modalEmbHtml = false;
+	var modal = $(this);
+	modal.find('.modFindMedContent').html("");
+	
+	tempMediaItem.url = $("#NewContentUrl").val();
+	if (tempMediaItem.url.indexOf("http") == 0) {
+		
+		tempMediaItem.domain = returnDomainFromURL(tempMediaItem.url);
+		if (tempMediaItem.domain) {
+			switch(tempMediaItem.domain) {
+				case "twitter.com":
+					tempMediaItem.domType = "Twitter";
+					modFindMediaOKVal = "Add";
+					break;
+					
+				case "youtu.be":				
+				case "www.youtube.com":
+				case "youtube.com":
+					tempMediaItem.domType = "YouTube";
+					var ytid = extractYouTubeId(tempMediaItem.url);
+					tempMediaItem.saveHtml = youTubeIframe.replace("{id}", ytid);
+					modalEmbHtml = "<div class='modal-video'>" + tempMediaItem.saveHtml + "</div>";
+					modFindMediaOKVal = "Add";
+					break;
+					
+				default:
+					break;
+			}
+		}
+	}
+	
+	modFindMediaOK.text(modFindMediaOKVal);
+	modFindMediaOK.unbind('click').on("click", addMediaItem);
+	
+	modal.find('.modMediaType').text(tempMediaItem.domType);
+	if (modalEmbHtml) {
+		modal.find('.modFindMedContent').html(modalEmbHtml);
+	}
+	
+	//var modal = $(this);
+	//modal.find('.modal-title').text('New message to ' + recipient);
+	//modal.find('.modal-body input').val(recipient);
+	
+	window.setTimeout(function() {
+		$(".modFindMedLoading").hide(); $(".modFindMedLoaded").show();
+	}, 1000);
+});
+
+$('#modFindMedia').on('hide.bs.modal', function (event) {
+	$(".modFindMedLoaded").hide();
+	$(".modFindMedLoading").show();
+	
+	$(".modFindMediaOK").text("OK");
+	var saveHtml = "";
+	var modal = $(this);
+	modal.find('.modFindMedContent').html("");
+	modal.find('.modMediaType').text("unknown");
+});
+
+function addMediaItem() {
+	var ligp = $(".panel-linkup ul.list-group");
+	ligp.children().remove();	
+	
+	if (tempMediaItem.domType == "unknown") {
+		resetMediaItemVars();
+	} else {
+		setCurrentMItoTMI();
+		
+		var litxt = currentMediaItem.domType + ": " + currentMediaItem.url;
+		var li = $('<li class="list-group-item mediaitem mediatype-'+currentMediaItem.domType+'">').text(litxt).prop("title", litxt);
+		var rmbut = $('<button type="button" class="btn btn-warning" onclick="javascript:removeMediaItem();">');
+		rmbut.append($('<span class="glyphicon glyphicon-remove" aria-hidden="true">'));
+		li.append(rmbut);
+	
+		ligp.append(li);
+	}
+	
+	$('#modFindMedia').modal('hide');
+}
+
+function removeMediaItem() { 
+	$(".panel-linkup ul.list-group").children().remove();
+	resetMediaItemVars();
 }
 
 function setAddType(sender) {

@@ -23,9 +23,38 @@
         <link rel="stylesheet" href="css/main.css">
 	</head>
     <body class="">
-        <!--[if lt IE 8]>
+      <!--[if lt IE 8]>
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+      <![endif]-->
+		
+		<!-- Modals -->      
+		  
+      <!-- Find Media Modal -->
+		<div class="modal fade" id="modFindMedia" tabindex="-1" role="dialog" aria-labelledby="mLabFindMedia" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+			      <div class="modal-header">
+			      	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			      		<span aria-hidden="true">&times;</span>
+			      	</button>
+			      	<h4 class="modal-title" id="mLabFindMedia">Find Media</h4>
+			      </div>
+			      <div class="modal-body">
+						<div class="modFindMedLoading">Loading...</div>			      	
+			      	<div class="modFindMedLoaded">
+							<p>Link is <span class="modMediaType">unknown</span>.</p>
+							<div class="modFindMedContent">
+							</div>
+			      	</div>
+			      </div>
+			      <div class="modal-footer">
+			      	<button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancel</button>
+			      	<button type="button" class="btn btn-primary btn-success modFindMediaOK">OK</button>
+			   	</div>
+			   </div>
+			</div>
+		</div>
+        
 		<div class="container">
 			<div class="sidebar">
 				<div class="sidebaroption sidebaroption-new">
@@ -38,31 +67,43 @@
 						    <textarea class="form-control" rows="3" id="NewContDesc" placeholder="Content/Description"></textarea>
 						</div>
 						
-						<hr></hr>
-						
-						<label>Type:</label>
-						<div class="input-group">
-							<div class="input-group-btn">
-								<button type="button" class="btn btn-primary btn-group-justified dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="curtype">Article</span> <span class="caret"></span></button>
-								<ul class="dropdown-menu newtypeoptions">
-									<li><a onclick="javascript:setAddType(this);" data-plural="Articles">Article</a></li>
-									<li><a onclick="javascript:setAddType(this);" data-plural="Blog Posts">Blog Post</a></li>
-									<li><a onclick="javascript:setAddType(this);">CiSP</a></li>
-									<li><a onclick="javascript:setAddType(this);">Intelligence Sharing</a></li>
-									<li><a onclick="javascript:setAddType(this);" data-plural="Social Media Items">Social Media Item</a></li>
-									<li><a onclick="javascript:setAddType(this);" data-plural="Tweets">Tweet</a></li>
-									<li role="separator" class="divider"></li>
-									<li><a onclick="javascript:setAddType(this);">Other</a></li>
-								</ul>
+						<div class="panel panel-default panel-type">
+							<div class="panel-heading">Type</div>
+							<div class="input-group">
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-primary btn-group-justified dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="curtype">Article</span> <span class="caret"></span></button>
+									<ul class="dropdown-menu newtypeoptions">
+										<li><a onclick="javascript:setAddType(this);" data-plural="Articles">Article</a></li>
+										<li><a onclick="javascript:setAddType(this);" data-plural="Blog Posts">Blog Post</a></li>
+										<li><a onclick="javascript:setAddType(this);">CiSP</a></li>
+										<li><a onclick="javascript:setAddType(this);">Intelligence Sharing</a></li>
+										<li><a onclick="javascript:setAddType(this);" data-plural="Reports">Report</a></li>
+										<li><a onclick="javascript:setAddType(this);" data-plural="Social Media Items">Social Media Item</a></li>
+										<li><a onclick="javascript:setAddType(this);" data-plural="Tweets">Tweet</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a onclick="javascript:setAddType(this);">Other</a></li>
+									</ul>
+								</div>
 							</div>
 						</div>
 						
-						<div class="input-group">
-							<label for="NewContentUrl">Link:</label>
-							<input type="text" class="form-control" id="NewContentUrl" placeholder="https://example.org">
+						<div class="panel panel-default panel-linkup">
+							<div class="panel-heading">Link/Upload</div>
+							<div class="input-group">
+								<input type="text" class="form-control" id="NewContentUrl" placeholder="https://example.org">
+								<div class="input-group-btn">
+									<label class="btn btn-info btn-file" id="btnBrowse" title="Browse">
+										<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+										<input type="file" style="display: none;">
+									</label>					
+									<button type="button" class="btn btn-info" id="btnFindMedia" title="Find Media" data-toggle="modal" data-target="#modFindMedia">
+										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									</button>
+								</div>
+							</div>
+							<ul class="list-group">
+							</ul>
 						</div>
-						
-						<hr></hr>
 						
 						<div class="panel panel-default panel-iocs">
 							<div class="panel-heading">Indicators of Compromise</div>
@@ -94,8 +135,6 @@
 							</ul>
 						</div>
 						
-						<hr></hr>
-						
 						<div class="panel panel-default panel-tags">
 							<div class="panel-heading">Tags</div>
 							<div class="input-group">
@@ -110,7 +149,6 @@
 							</ul>
 						</div>
 						
-						<hr></hr>
 						<input type="hidden" id="hidUID" value="">
 						<div class="btn-group btn-group-justified" role="group" >
 							<a onclick="javascript:newContClear();" class="btn btn-danger" role="button">Clear</a>
